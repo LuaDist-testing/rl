@@ -1,18 +1,10 @@
--- This file was automatically generated for the LuaDist project.
-
 package = "rl"
 version = "0.2-1"
 
--- LuaDist source
 source = {
-  tag = "0.2-1",
-  url = "git://github.com/LuaDist-testing/rl.git"
+   url = "git://github.com/vpong/torch-rl.git",
+   tag = "v0.2"
 }
--- Original source
--- source = {
---    url = "git://github.com/vpong/torch-rl.git",
---    tag = "v0.2"
--- }
 
 description = {
    summary = "A package for basic reinforcement learning algorithms.",
