@@ -1,17 +1,17 @@
 -- This file was automatically generated for the LuaDist project.
 
 package = "rl"
-version = "0.2-4"
+version = "0.2-5"
 
 -- LuaDist source
 source = {
-  tag = "0.2-4",
+  tag = "0.2-5",
   url = "git://github.com/LuaDist-testing/rl.git"
 }
 -- Original source
 -- source = {
 --    url = "git://github.com/vpong/torch-rl.git",
---    tag = "v0.2.2"
+--    tag = "v0.2.3"
 -- }
 
 description = {
