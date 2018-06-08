@@ -1,8 +1,6 @@
-local M = {}
-
 -- Thanks to
 -- https://scriptinghelpers.org/questions/11242/how-to-make-a-weighted-selection
-function M.weighted_random_choice(items)
+function rl.util.weighted_random_choice(items)
     -- Sum all weights
     local total_weight = 0
     for item, weight in pairs(items) do
@@ -29,7 +27,7 @@ function M.weighted_random_choice(items)
 end
 
 -- Not called fold left/right because order of pairs is not guaranteed.
-function M.fold(fn)
+function rl.util.fold(fn)
     return function (acc)
         return function (list)
             for k, v in pairs(list) do
@@ -41,12 +39,12 @@ function M.fold(fn)
 end
 
 -- Do this to avoid accumulator being reused
-local sum_from = M.fold(function (a, b) return a + b end)
-function M.sum(lst)
+local sum_from = rl.util.fold(function (a, b) return a + b end)
+function rl.util.sum(lst)
     return sum_from(0)(lst)
 end
 
-function M.fold_with_key(fn)
+function rl.util.fold_with_key(fn)
     return function (acc)
         return function (list)
             for k, v in pairs(list) do
@@ -59,7 +57,7 @@ end
 
 -- Return the (element with max value, key of that element) of a table
 -- value_of is a function that given an element in the list, returns its value.
-function M.max(tab, value_of)
+function rl.util.max(tab, value_of)
     max_elem = nil
     maxK = nil
     maxV = 0
@@ -75,15 +73,15 @@ function M.max(tab, value_of)
 end
 
 -- Thanks to https://gist.github.com/tylerneylon/81333721109155b2d244
-function M.copy_simply(obj)
+function rl.util.copy_simply(obj)
     if type(obj) ~= 'table' then return obj end
     local res = {}
-    for k, v in pairs(obj) do res[M.copy_simply(k)] = M.copy_simply(v) end
+    for k, v in pairs(obj) do res[rl.util.copy_simply(k)] = rl.util.copy_simply(v) end
     return res
 end
 
 -- cache the results of a function call
-function M.memoize(f)
+function rl.util.memoize(f)
     local cache = nil
     return (
         function ()
@@ -117,29 +115,29 @@ local function deepcompare(t1, t2, ignore_mt)
 
     for k1,v1 in pairs(t1) do
         local v2 = t2[k1]
-        if v2 == nil or not M.deepcompare(v1,v2) then
+        if v2 == nil or not rl.util.deepcompare(v1,v2) then
             return false
         end
     end
     for k2,v2 in pairs(t2) do
         local v1 = t1[k2]
-        if v1 == nil or not M.deepcompare(v1,v2) then
+        if v1 == nil or not rl.util.deepcompare(v1,v2) then
             return false
         end
     end
     return true
 end
 
-function M.deepcompare(t1, t2)
+function rl.util.deepcompare(t1, t2)
     return deepcompare(t1, t2, true)
 end
 
-function M.deepcompare_with_meta(t1, t2)
+function rl.util.deepcompare_with_meta(t1, t2)
     return deepcompare(t1, t2, false)
 end
 
 -- Get # of times elem is in list
-function M.get_count(elem, list)
+function rl.util.get_count(elem, list)
     local count = 0
     for _, e in pairs(list) do
         if e == elem then
@@ -150,7 +148,7 @@ function M.get_count(elem, list)
 end
 
 -- check if Bernounilli trial results is reasonable
-function M.is_prob_good(n, p, N)
+function rl.util.is_prob_good(n, p, N)
     if p == 0 then
         return n == 0
     end
@@ -164,9 +162,7 @@ end
 
 -- Check if # times elem is in list is reasonable, assuming it had a fixed
 -- probability of being in that list
-function M.elem_has_good_freq(elem, list, expected_p)
-    local n = M.get_count(elem, list)
-    return M.is_prob_good(n, expected_p, #list)
+function rl.util.elem_has_good_freq(elem, list, expected_p)
+    local n = rl.util.get_count(elem, list)
+    return rl.util.is_prob_good(n, expected_p, #list)
 end
-
-return M

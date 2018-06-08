@@ -1,7 +1,7 @@
 require 'constants'
-local M = {}
-
-function M.are_testmdp_policy_probabilities_good(policy, expected_probabilities)
+function rl.util.are_testmdp_policy_probabilities_good(
+        policy,
+        expected_probabilities)
     local n_times_action = {0, 0, 0}
     local n_iters = 10000
     for i = 1, n_iters do
@@ -11,7 +11,7 @@ function M.are_testmdp_policy_probabilities_good(policy, expected_probabilities)
     end
 
     for action = 1, 3 do
-        if not util.is_prob_good(
+        if not rl.util.is_prob_good(
                 n_times_action[action],
                 expected_probabilities[action],
                 n_iters) then
@@ -21,7 +21,7 @@ function M.are_testmdp_policy_probabilities_good(policy, expected_probabilities)
     return true
 end
 
-function M.are_tensors_same_shape(t1, t2)
+function rl.util.are_tensors_same_shape(t1, t2)
     if t1:dim() ~= t2:dim() then
         return false
     end
@@ -33,7 +33,7 @@ function M.are_tensors_same_shape(t1, t2)
     return true
 end
 
-function M.do_qtable_qfunc_match(mdp, q_table, qfunc)
+function rl.util.do_qtable_qfunc_match(mdp, q_table, qfunc)
     for _, state in pairs(mdp:get_all_states()) do
         for _, action in pairs(mdp:get_all_actions()) do
             local sa_value = qfunc:get_value(state, action)
@@ -45,7 +45,7 @@ function M.do_qtable_qfunc_match(mdp, q_table, qfunc)
     return true
 end
 
-function M.do_vtable_vfunc_match(mdp, v_table, vfunc)
+function rl.util.do_vtable_vfunc_match(mdp, v_table, vfunc)
     for _, state in pairs(mdp:get_all_states()) do
         local state_value = vfunc:get_value(state)
         if v_table[state] ~= state_value then
@@ -54,6 +54,3 @@ function M.do_vtable_vfunc_match(mdp, v_table, vfunc)
     end
     return true
 end
-
-
-return M
