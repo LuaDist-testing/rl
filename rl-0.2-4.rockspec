@@ -1,11 +1,11 @@
 -- This file was automatically generated for the LuaDist project.
 
 package = "rl"
-version = "0.2-3"
+version = "0.2-4"
 
 -- LuaDist source
 source = {
-  tag = "0.2-3",
+  tag = "0.2-4",
   url = "git://github.com/LuaDist-testing/rl.git"
 }
 -- Original source
@@ -54,7 +54,7 @@ build = {
         ["rl.QLin"] = "QLin.lua",
         ["rl.QNN"] = "QNN.lua",
         ["rl.QVAnalyzer"] = "QVAnalyzer.lua",
-        ["rl.rl"] = "rl.lua",
+        ["rl"] = "rl.lua",
         ["rl.rl_constants"] = "rl_constants.lua",
         ["rl.SAFeatureExtractor"] = "SAFeatureExtractor.lua",
         ["rl.SarsaAnalyzer"] = "SarsaAnalyzer.lua",
